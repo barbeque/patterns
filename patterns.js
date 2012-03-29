@@ -9,10 +9,9 @@ function main() {
 	blitConcentricCircles(100, 300, hose);
 	blitConcentricCircles(450, 500, hose);
 	
-	drawPolar(canvas.width / 2, canvas.height / 2, function(theta) { return 2 * Math.sin(4 * theta); }, 45.0, hose);
-	drawPolar(canvas.width / 2, canvas.height / 2, function(theta) { return 2 * Math.sin(4 * theta - 4); }, 45.0, hose);
+	//drawPolar(canvas.width / 2, canvas.height / 2, function(theta) { return 2 * Math.sin(4 * theta); }, 45.0, hose);
+	drawPolar(canvas.width / 2, canvas.height / 2, function(theta) { return 2 * Math.sin(12 * theta - 4); }, 45.0, hose);
 	drawPolar(canvas.width / 2, canvas.height / 2, function(theta) { return 2 * Math.sin(4 * theta - 12); }, 45.0, hose);
-	drawPolar(canvas.width / 2, canvas.height / 2, function(theta) { return 2 * Math.sin(4 * theta - 4); }, 65.0, hose);
 	
 	hose.flip();
 }

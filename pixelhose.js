@@ -14,6 +14,8 @@ PixelHose = function(canvas, context) {
 			// assuming { r, g, b, a }
 			var index = (y * canvas.width * 4) + (x * 4);
 			
+			if(x >= canvas.width || x < 0 || y < 0 || y >= canvas.height) { return; }
+			
 			buffer.data[index] = colour.r;
 			buffer.data[index + 1] = colour.g;
 			buffer.data[index + 2] = colour.b;
