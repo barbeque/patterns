@@ -16,7 +16,7 @@ function main() {
 		}
 	}
 	
-	blitInversionRect(25, 25, 50, 75, hose);
+	blitInversionRect(25, 25, 150, 205, hose);
 	
 	hose.flip();
 }
@@ -25,7 +25,7 @@ function blitInversionRect(startX, startY, w, h, hose) {
 	for(var y = startY; y < startY + h; ++y) {
 		for(var x = startX; x < startX + w; ++x) {
 			var colour = hose.get(x, y);
-			if((x * y) % 20 == 0) {
+			if(Math.sin(x + y) > 0.75) {
 				colour.r = 255 - colour.r;
 				hose.draw(x, y, colour);
 			}
