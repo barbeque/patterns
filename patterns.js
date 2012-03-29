@@ -17,6 +17,10 @@ function main() {
 	}
 	
 	blitInversionRect(25, 25, 150, 205, hose);
+	// interference is wacky.
+	blitInversionRect(50, 50, 150, 205, hose);
+	blitInversionRect(75, 75, 150, 205, hose);
+	blitInversionRect(100, 100, 150, 205, hose);
 	
 	hose.flip();
 }
@@ -25,8 +29,8 @@ function blitInversionRect(startX, startY, w, h, hose) {
 	for(var y = startY; y < startY + h; ++y) {
 		for(var x = startX; x < startX + w; ++x) {
 			var colour = hose.get(x, y);
-			if(Math.sin(x + y) > 0.75) {
-				colour.r = 255 - colour.r;
+			if((x + y) % 10 == 0) {
+				colour.r = (255 - colour.r);
 				hose.draw(x, y, colour);
 			}
 		}
