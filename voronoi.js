@@ -16,5 +16,19 @@ function main() {
 		}
 	}
 	
+	blitInversionRect(25, 25, 50, 75, hose);
+	
 	hose.flip();
+}
+
+function blitInversionRect(startX, startY, w, h, hose) {
+	for(var y = startY; y < startY + h; ++y) {
+		for(var x = startX; x < startX + w; ++x) {
+			var colour = hose.get(x, y);
+			if((x + y) % 2 == 0) {
+				colour.r = 255 - colour.r;
+				hose.draw(x, y, colour);
+			}
+		}
+	}
 }
