@@ -17,7 +17,7 @@ function blitConcentricCircles(originX, originY, hose) {
 		for(var x = 0; x < canvas.width; ++x) {
 			var colour = { r: 255, g: 255, b: 255, a: 255 };
 			
-			if(Math.round(hose.distance(originX, originY, x, y)) % 10 == 0) {
+			if(Math.round(phMath.distance(originX, originY, x, y)) % 10 == 0) {
 				colour.g = 0;
 				colour.b = 0;
 				hose.draw(x, y, colour);
