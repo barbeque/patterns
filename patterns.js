@@ -5,13 +5,18 @@ function main() {
 	
 	hose.clear();
 	
+	var originX = 10;
+	var originY = 50;
+	
 	for(var y = 0; y < canvas.height; ++y) {
 		for(var x = 0; x < canvas.width; ++x) {
 			var colour = { r: 255, g: 255, b: 255, a: 255 };
-			if((x + y) % 5 == 0) {
+			
+			if(Math.round(hose.distance(originX, originY, x, y)) % 10 == 0) {
 				colour.g = 0;
 				colour.b = 0;
 			}
+			
 			hose.draw(x, y, colour);
 		}
 	}

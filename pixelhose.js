@@ -37,6 +37,11 @@ PixelHose = function(canvas, context) {
 			context.restore();
 			
 			context.putImageData(buffer, 0, 0);
+		},
+		
+		// utility functions for geometry
+		distance: function(x1, y1, x2, y2) {
+			return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 		}
 	};
 }
