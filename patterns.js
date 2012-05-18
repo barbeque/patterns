@@ -20,14 +20,18 @@ function main() {
 
 				// For now, just do some stripes
 				var uv = computeUV(x, y, centreX, centreY, radius);
-				var colour = (uv.u) * 255;
+				var colour = sample(uv, { u: 0, v: 0 });
 
-				hose.draw(x, y, { r: 0, g: uv.u * 255, b: uv.v * 255, a: 255 });
+				hose.draw(x, y, colour);
 			}
 		}
 	}
 
 	hose.flip();
+}
+
+function sample(uv, offset) {
+	return { r: (uv.u * 255), g: 0, b: (uv.v * 255), a: 255 };
 }
 
 /// Get Euclidian distance between two points on the same coordinate
