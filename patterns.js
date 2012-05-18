@@ -16,8 +16,6 @@ function main() {
 	for(var y = originY; y < originY + sphereHeight; ++y) {
 		for(var x = originX; x < originX + sphereWidth; ++x) {
 			if(distance(x, y, centreX, centreY) < radius) {
-				//var z = computeZ(x, y, centreX, centreY, radius);
-
 				// For now, just do some stripes
 				var uv = computeUV(x, y, centreX, centreY, radius);
 				var colour = sample(uv, { u: 0, v: 0 });
@@ -31,7 +29,17 @@ function main() {
 }
 
 function sample(uv, offset) {
-	return { r: (uv.u * 255), g: 0, b: (uv.v * 255), a: 255 };
+	var colour = 200;
+	var threshold = 0.8;
+
+	if(uv.u > threshold && uv.v > threshold) {
+		colour = 120;
+	}
+	else if(uv.u < threshold && uv.v < threshold) {
+		colour = 120;
+	}
+
+	return { r: colour, g: colour, b: colour, a: 255 };
 }
 
 /// Get Euclidian distance between two points on the same coordinate
