@@ -45,8 +45,8 @@ function buildTextureMap() {
 }
 
 function step(canvas, context, hose, state) {
-	state.offset.u += 5;
-	state.offset.v += 5;
+	state.offset.u += 0.01;
+	state.offset.v += 0.01;
 
 	hose.clear();
 
@@ -85,8 +85,11 @@ function step(canvas, context, hose, state) {
 }
 
 function sample(uv, offset, texture) {
-	var yIndex = Math.floor(uv.v * (texture.length - 1)) % texture.length - 1;
-	var xIndex = Math.floor(uv.u * (texture[yIndex].length - 1)) % texture[yIndex].length - 1;
+	var u = (uv.u /*+ offset.u*/) % 1.0;
+	var v = (uv.v /*+ offset.v*/) % 1.0;
+
+	var yIndex = Math.floor(v * (texture.length - 1)) % (texture.length - 1);
+	var xIndex = Math.floor(u * (texture[yIndex].length - 1)) % (texture[yIndex].length - 1);
 
 	var c = texture[yIndex][xIndex];
 	return c;
