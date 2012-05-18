@@ -2,7 +2,18 @@ function main() {
 	var canvas = document.getElementById("canvas");
 	var context = canvas.getContext("2d");
 	var hose = new PixelHose(canvas, context);
-	
+
+	var state = { offset: { u: 0, v: 0 } };
+
+	var s = function() { step(canvas, context, hose, state); }
+	state.stepFunction = s;
+	setTimeout(s, 1000 / 30);
+}
+
+function step(canvas, context, hose, state) {
+	state.offset.u += 0.05;
+	state.offset.v += 0.05;
+
 	hose.clear();
 
 	var sphereHeight = 256;
@@ -18,7 +29,7 @@ function main() {
 			if(distance(x, y, centreX, centreY) < radius) {
 				// For now, just do some stripes
 				var uv = computeUV(x, y, centreX, centreY, radius);
-				var colour = sample(uv, { u: 0, v: 0 });
+				var colour = sample(uv, state.offset);
 
 				hose.draw(x, y, colour);
 			}
@@ -26,11 +37,13 @@ function main() {
 	}
 
 	hose.flip();
+
+	setTimeout(state.stepFunction, 1000 / 30);
 }
 
 function sample(uv, offset) {
-	var r = uv.u * 255;
-	var g = uv.v * 165;
+	var r = ((uv.u + offset.u) % 1.0) * 255;
+	var g = ((uv.v + offset.v) % 1.0) * 165;
 	var b = 0;
 	var a = 255;
 	return { r:r, g:g, b:b, a:a };
