@@ -16,7 +16,11 @@ function main() {
 	for(var y = originY; y < originY + sphereHeight; ++y) {
 		for(var x = originX; x < originX + sphereWidth; ++x) {
 			if(distance(x, y, centreX, centreY) < radius) {
-				hose.draw(x, y, { r: 255, g: 0, b: 0, a: 255 });
+				var z = computeZ(x, y, centreX, centreY, radius);
+
+				var zColour = (z / radius) * 255.0;
+
+				hose.draw(x, y, { r: zColour, g: 0, b: 0, a: 255 });
 			}
 		}
 	}
@@ -32,7 +36,13 @@ function distance(x1, y1, x2, y2) {
 
 /// Get the depth at a given screen position
 function computeZ(x, y, centreX, centreY, radius) {
-	return 0; // TODO
+	// Figure out the Z for X dimension
+	var dx = (centreX - x);
+	var zx = Math.sqrt(radius*radius - dx*dx);
+	// Figure out the Z for Y dimension
+	var dy = (centreY - y);
+	var zy = Math.sqrt(radius*radius - dy*dy);
+	return (zx + zy) / 2; // I dunno, average seems right?
 }
 
 /// Get the U,V coordinate on the face of the sphere at a given
