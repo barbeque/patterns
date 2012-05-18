@@ -29,17 +29,11 @@ function main() {
 }
 
 function sample(uv, offset) {
-	var colour = 200;
-	var threshold = 0.8;
-
-	if(uv.u > threshold && uv.v > threshold) {
-		colour = 120;
-	}
-	else if(uv.u < threshold && uv.v < threshold) {
-		colour = 120;
-	}
-
-	return { r: colour, g: colour, b: colour, a: 255 };
+	var r = uv.u * 255;
+	var g = uv.v * 165;
+	var b = 0;
+	var a = 255;
+	return { r:r, g:g, b:b, a:a };
 }
 
 /// Get Euclidian distance between two points on the same coordinate
