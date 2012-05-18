@@ -24,6 +24,22 @@ function main() {
 	hose.flip();
 }
 
+/// Get Euclidian distance between two points on the same coordinate
+/// system.
 function distance(x1, y1, x2, y2) {
 	return Math.sqrt((y2-y1) * (y2-y1) + (x2-x1)*(x2-x1));
+}
+
+/// Get the depth at a given screen position
+function computeZ(x, y, centreX, centreY, radius) {
+	return 0; // TODO
+}
+
+/// Get the U,V coordinate on the face of the sphere at a given
+/// screen position.
+function computeUV(x, y, centreX, centreY, radius) {
+	// figure out Z
+	var z = computeZ(x, y, centreX, centreY, radius);
+	// compute UV from Z
+	return { u: x / Math.sqrt(x*x + y*y + z*z), v: y / Math.sqrt(x*x + y*y + z*z) };
 }
