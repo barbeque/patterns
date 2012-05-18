@@ -1,0 +1,1 @@
+This branch demonstrates the basic math behind drawing a sphere (with a wonky projection) and then converting x,y positions on the drawn sphere to u,v positions so we can do impromptu texture mapping.
