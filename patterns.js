@@ -19,7 +19,7 @@ function buildTextureMap() {
 
 	var checkerboardStep = 8;
 	var yChecked = false;
-	var xChecked = true;
+	var xChecked = false;
 
 	var map = new Array(h);
 	for(var y = 0; y < map.length; ++y) {
@@ -27,18 +27,16 @@ function buildTextureMap() {
 	}
 
 	for(var y = 0; y < h; ++y) {
+		if( y % checkerboardStep == 0 ) { yChecked = !yChecked; }
+
 		for(var x = 0; x < w; ++x) {
-			if(x > w / 2 && y > h / 2) {
-				map[y][x] = { r: 0, g: 255, b: 0, a: 255 };
-			}
-			else if(y > h / 2) {
+			if( x % checkerboardStep == 0) { xChecked = !xChecked; }
+
+			if((xChecked && !yChecked) || (!xChecked && yChecked)) {
 				map[y][x] = { r: 0, g: 128, b: 0, a: 255 };
 			}
-			else if(x > w / 2) {
-				map[y][x] = { r: 128, g: 0, b: 0, a: 255 };
-			}
 			else {
-				map[y][x] = { r: 255, g: 0, b: 0, a: 255 };
+				map[y][x] = { r: 0, g: 255, b: 0, a: 255 };
 			}
 		}
 	}
