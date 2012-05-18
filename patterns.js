@@ -16,11 +16,13 @@ function main() {
 	for(var y = originY; y < originY + sphereHeight; ++y) {
 		for(var x = originX; x < originX + sphereWidth; ++x) {
 			if(distance(x, y, centreX, centreY) < radius) {
-				var z = computeZ(x, y, centreX, centreY, radius);
+				//var z = computeZ(x, y, centreX, centreY, radius);
 
-				var zColour = (z / radius) * 255.0;
+				// For now, just do some stripes
+				var uv = computeUV(x, y, centreX, centreY, radius);
+				var colour = (uv.u) * 255;
 
-				hose.draw(x, y, { r: zColour, g: 0, b: 0, a: 255 });
+				hose.draw(x, y, { r: 0, g: uv.u * 255, b: uv.v * 255, a: 255 });
 			}
 		}
 	}
@@ -37,10 +39,10 @@ function distance(x1, y1, x2, y2) {
 /// Get the depth at a given screen position
 function computeZ(x, y, centreX, centreY, radius) {
 	// Figure out the Z for X dimension
-	var dx = (centreX - x);
+	var dx = Math.abs(centreX - x);
 	var zx = Math.sqrt(radius*radius - dx*dx);
 	// Figure out the Z for Y dimension
-	var dy = (centreY - y);
+	var dy = Math.abs(centreY - y);
 	var zy = Math.sqrt(radius*radius - dy*dy);
 	return (zx + zy) / 2; // I dunno, average seems right?
 }
